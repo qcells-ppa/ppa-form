@@ -619,7 +619,7 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
         </div>
         <div class="field" id="f-phone">
           <label class="field-label">연락처 <span class="req">*</span></label>
-          <input type="tel" id="phone" placeholder="010-0000-0000">
+          <input type="tel" id="phone" placeholder="010-0000-0000" oninput="formatPhone(this)">
           <div class="error-msg">연락처를 입력해 주세요</div>
         </div>
       </div>
@@ -896,6 +896,17 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
 </footer>
 
 <script>
+
+function formatPhone(input) {
+  var v = input.value.replace(/[^0-9]/g, '');
+  if (v.length <= 3) {
+    input.value = v;
+  } else if (v.length <= 7) {
+    input.value = v.slice(0,3) + '-' + v.slice(3);
+  } else {
+    input.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
+  }
+}
 function goHome(){
   // 모든 input, select, textarea 초기화
   document.querySelectorAll('input[type=text], input[type=tel], input[type=email], input[type=number]').forEach(el=>el.value='');
