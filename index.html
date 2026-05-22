@@ -897,6 +897,18 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
 
 <script>
 function goHome(){
+  // 모든 input, select, textarea 초기화
+  document.querySelectorAll('input[type=text], input[type=tel], input[type=email], input[type=number]').forEach(el=>el.value='');
+  document.querySelectorAll('select').forEach(el=>el.selectedIndex=0);
+  document.querySelectorAll('textarea').forEach(el=>el.value='');
+  // 라디오버튼 선택 해제
+  document.querySelectorAll('input[type=radio]').forEach(el=>{
+    el.checked=false;
+    el.closest('.radio-item') && el.closest('.radio-item').classList.remove('selected');
+  });
+  // 에러 클래스 제거
+  document.querySelectorAll('.field').forEach(el=>el.classList.remove('has-error'));
+  // 섹션 초기화
   document.querySelectorAll('.form-section').forEach(s=>s.classList.remove('active'));
   document.getElementById('sec-1').classList.add('active');
   document.getElementById('successScreen').style.display='none';
